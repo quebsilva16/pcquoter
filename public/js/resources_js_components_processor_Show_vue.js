@@ -23,10 +23,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   mounted: function mounted() {
-    this.showProcessor();
+    this.mostrarProcessors();
   },
   methods: {
-    showProcessor: function showProcessor() {
+    mostrarProcessors: function mostrarProcessors() {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -35,6 +35,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.next = 2;
               return _this.axios.get('/api/processor').then(function (response) {
                 _this.processors = response.data;
+                console.log(response);
               })["catch"](function (error) {
                 console.log(error);
                 _this.processors = [];
@@ -50,7 +51,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
       if (confirm("¿Confirma eliminar el registro?")) {
         this.axios["delete"]("/api/processor/".concat(id)).then(function (response) {
-          _this2.showProcessor();
+          _this2.mostrarProcessors();
         })["catch"](function (error) {
           console.log(error);
         });
@@ -83,7 +84,7 @@ var render = function render() {
     staticClass: "btn btn-success",
     attrs: {
       to: {
-        name: "crearProcessor"
+        name: "createProcessor"
       }
     }
   }, [_c("i", {
@@ -95,13 +96,13 @@ var render = function render() {
   }, [_c("table", {
     staticClass: "table table-bordered"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.processors, function (processor) {
-    return _c("tr", {
+    return _vm.processors.length > 0 ? _c("tr", {
       key: processor.id
-    }, [_c("td", [_vm._v(_vm._s(processor.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(processor.desription))]), _vm._v(" "), _c("td", [_c("router-link", {
+    }, [_c("td", [_vm._v(_vm._s(processor.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(processor.description))]), _vm._v(" "), _c("td", [_c("router-link", {
       staticClass: "btn btn-info",
       attrs: {
         to: {
-          name: "editarProcessir",
+          name: "editProcessor",
           params: {
             id: processor.id
           }
@@ -121,7 +122,11 @@ var render = function render() {
       }
     }, [_c("i", {
       staticClass: "fas fa-trash"
-    })])], 1)]);
+    })])], 1)]) : _c("tr", [_c("td", {
+      attrs: {
+        colspan: "3"
+      }
+    }, [_vm._v("No hay registros")])]);
   }), 0)])])])]);
 };
 var staticRenderFns = [function () {

@@ -15,11 +15,11 @@ export const routes = [
     },
     {
         name: 'showProcessor',
-        path: '/processors',
+        path: '/processor',
         component: Show
     },
     {
-        name: 'editProcessor',
+        name: 'createProcessor',
         path: '/create',
         component: Create
     },
